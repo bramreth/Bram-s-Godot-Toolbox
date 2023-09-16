@@ -1,0 +1,401 @@
+[gd_scene load_steps=13 format=3 uid="uid://sbl4rscivr8g"]
+
+[ext_resource type="Theme" uid="uid://bq6qbvmwxf5gm" path="res://addons/brambox/UserInterface/UITheme.tres" id="1_ga3o8"]
+[ext_resource type="Script" path="res://addons/brambox/UserInterface/settings_container.gd" id="2_yf2ij"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cu3mp"]
+content_margin_left = 64.0
+content_margin_right = 64.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5dyx3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n56m4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ppig"]
+content_margin_left = 64.0
+content_margin_right = 64.0
+bg_color = Color(0.701961, 0.129412, 0.129412, 0.607843)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjolc"]
+content_margin_left = 64.0
+content_margin_right = 64.0
+bg_color = Color(0.13, 0.55, 0.13, 0.61)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wjbix"]
+content_margin_left = 64.0
+content_margin_right = 64.0
+bg_color = Color(0.121569, 0.560784, 0.8, 0.607843)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2enc"]
+content_margin_left = 64.0
+content_margin_right = 64.0
+bg_color = Color(0.121569, 0.560784, 0.8, 0.607843)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_66siy"]
+content_margin_left = 64.0
+content_margin_right = 64.0
+bg_color = Color(0.58, 0, 0.83, 0.61)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="InputEventAction" id="InputEventAction_gbevd"]
+action = &"ui_cancel"
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_ljjvh"]
+events = [SubResource("InputEventAction_gbevd")]
+
+[node name="SettingsContainer" type="MarginContainer" groups=["Settings"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ga3o8")
+script = ExtResource("2_yf2ij")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+theme_override_styles/tab_selected = SubResource("StyleBoxEmpty_cu3mp")
+theme_override_styles/tab_hovered = SubResource("StyleBoxEmpty_cu3mp")
+theme_override_styles/tab_unselected = SubResource("StyleBoxEmpty_cu3mp")
+theme_override_styles/tab_disabled = SubResource("StyleBoxEmpty_5dyx3")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_n56m4")
+
+[node name="Video" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="FullscreenPanel" type="PanelContainer" parent="VBoxContainer/TabContainer/Video"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ppig")
+
+[node name="FullscreenContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Video/FullscreenPanel"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="FullscreenLabel" type="Label" parent="VBoxContainer/TabContainer/Video/FullscreenPanel/FullscreenContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FullScreen"
+
+[node name="FullscreenCheckButton" type="CheckButton" parent="VBoxContainer/TabContainer/Video/FullscreenPanel/FullscreenContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="SSAAPanel" type="PanelContainer" parent="VBoxContainer/TabContainer/Video"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ppig")
+
+[node name="SSAAContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Video/SSAAPanel"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="SSAALabel" type="Label" parent="VBoxContainer/TabContainer/Video/SSAAPanel/SSAAContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Screen Space Anti-Aliasing"
+
+[node name="SSAAOptionButton" type="OptionButton" parent="VBoxContainer/TabContainer/Video/SSAAPanel/SSAAContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 4
+item_count = 2
+selected = 0
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "FXAA"
+popup/item_1/id = 1
+
+[node name="MSAAPanel" type="PanelContainer" parent="VBoxContainer/TabContainer/Video"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ppig")
+
+[node name="MSAAContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Video/MSAAPanel"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="MSAALabel" type="Label" parent="VBoxContainer/TabContainer/Video/MSAAPanel/MSAAContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Multisample Anti-Aliasing"
+
+[node name="MSAAOptionButton" type="OptionButton" parent="VBoxContainer/TabContainer/Video/MSAAPanel/MSAAContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 4
+item_count = 4
+selected = 2
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "2x"
+popup/item_1/id = 1
+popup/item_2/text = "4x"
+popup/item_2/id = 2
+popup/item_3/text = "8x"
+popup/item_3/id = 3
+
+[node name="ShadowPanel" type="PanelContainer" parent="VBoxContainer/TabContainer/Video"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ppig")
+
+[node name="ShadowContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Video/ShadowPanel"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="ShadowLabel" type="Label" parent="VBoxContainer/TabContainer/Video/ShadowPanel/ShadowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Shadow Quality
+"
+
+[node name="ShadowOptionButton" type="OptionButton" parent="VBoxContainer/TabContainer/Video/ShadowPanel/ShadowContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 4
+item_count = 3
+selected = 1
+popup/item_0/text = "Low"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "High"
+popup/item_2/id = 2
+
+[node name="Audio" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MasterPanel" type="PanelContainer" parent="VBoxContainer/TabContainer/Audio"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hjolc")
+
+[node name="MasterContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Audio/MasterPanel"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="MasterLabel" type="Label" parent="VBoxContainer/TabContainer/Audio/MasterPanel/MasterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Master Volume
+"
+
+[node name="MasterSlider" type="HSlider" parent="VBoxContainer/TabContainer/Audio/MasterPanel/MasterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+
+[node name="MusicPanel" type="PanelContainer" parent="VBoxContainer/TabContainer/Audio"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hjolc")
+
+[node name="MusicContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Audio/MusicPanel"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="MusicLabel" type="Label" parent="VBoxContainer/TabContainer/Audio/MusicPanel/MusicContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "MUSIC Volume
+"
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer/TabContainer/Audio/MusicPanel/MusicContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+value = 0.8
+
+[node name="DialoguePanel" type="PanelContainer" parent="VBoxContainer/TabContainer/Audio"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hjolc")
+
+[node name="DialogueContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Audio/DialoguePanel"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="DialogueLabel" type="Label" parent="VBoxContainer/TabContainer/Audio/DialoguePanel/DialogueContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Dialogue Volume
+"
+
+[node name="DialogueSlider" type="HSlider" parent="VBoxContainer/TabContainer/Audio/DialoguePanel/DialogueContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+value = 0.8
+
+[node name="SFXPanel" type="PanelContainer" parent="VBoxContainer/TabContainer/Audio"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hjolc")
+
+[node name="SFXContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Audio/SFXPanel"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="SFXLabel" type="Label" parent="VBoxContainer/TabContainer/Audio/SFXPanel/SFXContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SFX Volume
+"
+
+[node name="SFXSlider" type="HSlider" parent="VBoxContainer/TabContainer/Audio/SFXPanel/SFXContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+value = 0.8
+
+[node name="SubtitlesPanel" type="PanelContainer" parent="VBoxContainer/TabContainer/Audio"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hjolc")
+
+[node name="SubtitlesContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Audio/SubtitlesPanel"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="SubtitlesLabel" type="Label" parent="VBoxContainer/TabContainer/Audio/SubtitlesPanel/SubtitlesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Subtitles"
+
+[node name="SubtitlesCheckButton" type="CheckButton" parent="VBoxContainer/TabContainer/Audio/SubtitlesPanel/SubtitlesContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="Gameplay" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="FOVPanel" type="PanelContainer" parent="VBoxContainer/TabContainer/Gameplay"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wjbix")
+
+[node name="FOVContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Gameplay/FOVPanel"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="FOVLabel" type="Label" parent="VBoxContainer/TabContainer/Gameplay/FOVPanel/FOVContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FOV"
+
+[node name="FOVSlider" type="HSlider" parent="VBoxContainer/TabContainer/Gameplay/FOVPanel/FOVContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+size_flags_vertical = 1
+
+[node name="FOVValue" type="Label" parent="VBoxContainer/TabContainer/Gameplay/FOVPanel/FOVContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(144, 0)
+layout_mode = 2
+text = "999"
+
+[node name="SensitivityPanel" type="PanelContainer" parent="VBoxContainer/TabContainer/Gameplay"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p2enc")
+
+[node name="SensitivityContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Gameplay/SensitivityPanel"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="SensitivityLabel" type="Label" parent="VBoxContainer/TabContainer/Gameplay/SensitivityPanel/SensitivityContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mouse Sensitivity"
+
+[node name="SensitivityDropdown" type="OptionButton" parent="VBoxContainer/TabContainer/Gameplay/SensitivityPanel/SensitivityContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 4
+item_count = 5
+popup/item_0/text = "Very Low"
+popup/item_0/id = 0
+popup/item_1/text = "Low"
+popup/item_1/id = 1
+popup/item_2/text = "Medium"
+popup/item_2/id = 2
+popup/item_3/text = "High"
+popup/item_3/id = 3
+popup/item_4/text = "Very High"
+popup/item_4/id = 4
+
+[node name="Debug" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ReloadPanel" type="PanelContainer" parent="VBoxContainer/TabContainer/Debug"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_66siy")
+
+[node name="ReloadContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Debug/ReloadPanel"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="ReloadButton" type="Button" parent="VBoxContainer/TabContainer/Debug/ReloadPanel/ReloadContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Reload Current Scene"
+
+[node name="Button" type="Button" parent="VBoxContainer" node_paths=PackedStringArray("shortcut_context")]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+shortcut_context = NodePath("../..")
+theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_ljjvh")
+shortcut_in_tooltip = false
+text = "Back"
+
+[connection signal="toggled" from="VBoxContainer/TabContainer/Video/FullscreenPanel/FullscreenContainer/FullscreenCheckButton" to="." method="_on_fullscreen_check_button_toggled"]
+[connection signal="item_selected" from="VBoxContainer/TabContainer/Video/SSAAPanel/SSAAContainer/SSAAOptionButton" to="." method="_on_ssaa_option_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/TabContainer/Video/MSAAPanel/MSAAContainer/MSAAOptionButton" to="." method="_on_msaa_option_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/TabContainer/Video/ShadowPanel/ShadowContainer/ShadowOptionButton" to="." method="_on_shadow_option_button_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/TabContainer/Audio/MasterPanel/MasterContainer/MasterSlider" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/TabContainer/Audio/MusicPanel/MusicContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/TabContainer/Audio/DialoguePanel/DialogueContainer/DialogueSlider" to="." method="_on_dialogue_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/TabContainer/Audio/SFXPanel/SFXContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/TabContainer/Gameplay/FOVPanel/FOVContainer/FOVSlider" to="." method="_on_fov_slider_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/TabContainer/Gameplay/SensitivityPanel/SensitivityContainer/SensitivityDropdown" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Debug/ReloadPanel/ReloadContainer/ReloadButton" to="." method="_on_reload_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

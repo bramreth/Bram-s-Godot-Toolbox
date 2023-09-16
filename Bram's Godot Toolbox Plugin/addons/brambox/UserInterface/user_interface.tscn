@@ -1,0 +1,120 @@
+[gd_scene load_steps=10 format=3 uid="uid://b4mrqfvtlycnc"]
+
+[ext_resource type="Script" path="res://addons/brambox/UserInterface/user_interface.gd" id="1_k3peq"]
+[ext_resource type="Shader" uid="uid://wn6mnfchf1w7" path="res://addons/brambox/UserInterface/ScreenSpaceBlur.tres" id="2_b1378"]
+[ext_resource type="Theme" uid="uid://bq6qbvmwxf5gm" path="res://addons/brambox/UserInterface/UITheme.tres" id="3_qu8um"]
+[ext_resource type="PackedScene" uid="uid://dyr1juv2ogxdr" path="res://addons/brambox/UserInterface/subtitle_handler.tscn" id="3_tu702"]
+[ext_resource type="PackedScene" uid="uid://sbl4rscivr8g" path="res://addons/brambox/UserInterface/settings_container.tscn" id="5_c6uib"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6vwxw"]
+shader = ExtResource("2_b1378")
+shader_parameter/BlurAmount = 1.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dk3bb"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_gbevd"]
+action = &"ui_cancel"
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_rg3uj"]
+events = [SubResource("InputEventAction_gbevd")]
+
+[node name="UserInterface" type="CanvasLayer"]
+script = ExtResource("1_k3peq")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("3_qu8um")
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/CenterContainer"]
+layout_mode = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="SubtitleHandler" parent="HUD" instance=ExtResource("3_tu702")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="PauseScreen" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_qu8um")
+
+[node name="BackgroundBlur" type="TextureRect" parent="PauseScreen"]
+material = SubResource("ShaderMaterial_6vwxw")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_dk3bb")
+
+[node name="PauseContainer" type="CenterContainer" parent="PauseScreen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseScreen/PauseContainer"]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseScreen/PauseContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "Pause"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PauseScreen/PauseContainer/VBoxContainer" node_paths=PackedStringArray("shortcut_context")]
+unique_name_in_owner = true
+layout_mode = 2
+shortcut_context = NodePath("../..")
+shortcut = SubResource("Shortcut_rg3uj")
+shortcut_in_tooltip = false
+text = "resume"
+
+[node name="SettingsButton" type="Button" parent="PauseScreen/PauseContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="PauseScreen/PauseContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit Game"
+
+[node name="SettingsContainer" parent="PauseScreen" instance=ExtResource("5_c6uib")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[connection signal="pressed" from="PauseScreen/PauseContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseScreen/PauseContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="PauseScreen/PauseContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="exit" from="PauseScreen/SettingsContainer" to="." method="_on_settings_container_exit"]

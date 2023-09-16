@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4ag2do2sl0n0"]
+
+[ext_resource type="Theme" uid="uid://bq6qbvmwxf5gm" path="res://addons/brambox/UserInterface/UITheme.tres" id="1_urwlp"]
+[ext_resource type="Script" path="res://addons/brambox/UserInterface/subtitles.gd" id="2_g2n4h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_86nqw"]
+content_margin_left = 16.0
+content_margin_right = 16.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+shadow_size = 1
+
+[node name="Subtitles" type="PanelContainer" groups=["Subtitles"]]
+custom_minimum_size = Vector2(0, 88)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource("1_urwlp")
+theme_override_styles/panel = SubResource("StyleBoxFlat_86nqw")
+script = ExtResource("2_g2n4h")
+
+[node name="DialogueLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DialoguePlayer" type="AudioStreamPlayer" parent="."]
+volume_db = 5.0
+
+[connection signal="finished" from="DialoguePlayer" to="." method="_on_dialogue_player_finished"]
